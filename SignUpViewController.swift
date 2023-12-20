@@ -32,10 +32,10 @@ class SignUpViewController: UIViewController {
     //if every data is correct, this function returns nil otherwise erorr message
     func validateFields() -> String?{
         // Check that all fields are filled in
-        var firstName =  firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-         var lastName = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-         var email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-         var password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let firstName =  firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         if firstName == ""{
             return "Please fill in all fields."
         }
@@ -60,6 +60,8 @@ class SignUpViewController: UIViewController {
         
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()
+     
+        
         
     }
     @IBAction func signUpTapped(_ sender: Any) {
@@ -94,7 +96,7 @@ class SignUpViewController: UIViewController {
                             self.showError("Error saving user data")
                         }
                     }
-                    // Transition to the home screen
+                    // Transition from signup to the homescreen
                     self.transitionToHome()
                          
                       }
