@@ -2,47 +2,39 @@
 //  HomeViewController.swift
 //  Campsite Hub
 //
-//  Created by SHYNU MARY VARGHESE on 2023-12-02.
+//  Created by SHYNU MARY VARGHESE on 2024-01-01.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController{
-    var email = String()
+class HomeViewController: UIViewController {
     
-    @IBOutlet weak var homeCollectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
+    var email = String()
+    let campTitle : [String] = ["alice lake","Grasslands National Park, Saskatchewan","Lake Superior Provincial Park, Ontario","manitoba-nopiming-park","Peter Lougheed Provincial Park, Alberta"]
+     let image : [String] = ["alice lake","Grasslands National Park, Saskatchewan","Lake Superior Provincial Park, Ontario","manitoba-nopiming-park","Peter Lougheed Provincial Park, Alberta"]
+    @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = email
+
         // Do any additional setup after loading the view.
-        //to set the dataSource and delegate property.
-        homeCollectionView.dataSource = self
-        homeCollectionView.delegate = self
-        //register a UICollectionViewCell subclass for use with your homecollectionview
-        homeCollectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "HomeCollectionViewCell")
-        
+        nameLabel.text = email
     }
+
 }
-//MARK: supply data to the cells
-extension HomeViewController: UICollectionViewDataSource{
-    // first method to return the number of items.
+extension HomeViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return campTitle.count
     }
-    //second method to return the cell to be displayed.
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as! HomeCollectionViewCell
-        cell.backgroundColor = .blue
+        let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeViewCellIdentifier", for: indexPath) as! homeCollectionViewCell
+        cell.campTitle.text = campTitle[indexPath.row]
+        cell.campImage.image = UIImage(named: image[indexPath.row])
+        
         
         return cell
     }
     
-}
-//MARK: interact with the view cells
-//delegate object is responsible for managing selection behaviour and interactions with individual items.
-extension HomeViewController: UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = homeCollectionView.cellForItem(at: indexPath) as! HomeCollectionViewCell
-    }
+    
 }
